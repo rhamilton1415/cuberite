@@ -8,16 +8,18 @@
 
 #include <random>
 
-#ifdef _WIN32
-	#define thread_local static __declspec(thread)
+#if defined _WIN32
+	#define thread_local __declspec(thread)
 #elif defined __APPLE__
-	#define thread_local static __thread
+	#define thread_local __thread
+#elif defined ANDROID
+	#define thread_local thread_local
 #endif
 
 static unsigned int GetRandomSeed()
 {
-	thread_local bool SeedCounterInitialized = 0;
-	thread_local unsigned int SeedCounter = 0;
+	static thread_local bool SeedCounterInitialized = 0;
+	static thread_local unsigned int SeedCounter = 0;
 	
 	if (!SeedCounterInitialized)
 	{

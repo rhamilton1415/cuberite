@@ -54,7 +54,7 @@ class cClientHandle  // tolua_export
 {  // tolua_export
 public:  // tolua_export
 
-	#if defined(ANDROID_NDK)
+	#if defined(ANDROID)
 		static const int DEFAULT_VIEW_DISTANCE = 4;  // The default ViewDistance (used when no value is set in Settings.ini)
 	#else
 		static const int DEFAULT_VIEW_DISTANCE = 10;
@@ -452,7 +452,12 @@ private:
 		// TODO: Add Kicking here as well
 	} ;
 	
+#ifdef ANDROID
+#warning Android <atomic> support is incomplete or broken - using plain variable (subject to data races!)
+	eState m_State;
+#else
 	std::atomic<eState> m_State;
+#endif
 	
 	/** m_State needs to be locked in the Destroy() function so that the destruction code doesn't run twice on two different threads */
 	cCriticalSection m_CSDestroyingState;
