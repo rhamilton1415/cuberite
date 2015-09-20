@@ -106,7 +106,6 @@ cProtocol180::cProtocol180(cClientHandle * a_Client, const AString & a_ServerAdd
 	m_ServerPort(a_ServerPort),
 	m_State(a_State),
 	m_ReceivedData(32 KiB),
-	m_IsEncrypted(false),
 	m_LastSentDimension(dimNotSet)
 {
 	// Create the comm log file, if so requested:
