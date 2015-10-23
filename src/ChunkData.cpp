@@ -44,26 +44,6 @@ cChunkData::cChunkData(cAllocationPool<cChunkData::sChunkSection> & a_Pool) :
 
 
 
-cChunkData::~cChunkData()
-{
-	#if __cplusplus < 201103L
-		// auto_ptr style interface for memory management
-		if (!m_IsOwner)
-		{
-			return;
-		}
-	#endif
-	for (size_t i = 0; i < NumSections; i++)
-	{
-		Free(m_Sections[i]);
-		m_Sections[i] = nullptr;
-	}
-}
-
-
-
-
-
 #if __cplusplus < 201103L
 	// auto_ptr style interface for memory management
 	cChunkData::cChunkData(const cChunkData & a_Other) :

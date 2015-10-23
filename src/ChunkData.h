@@ -38,7 +38,6 @@ public:
 	struct sChunkSection;
 
 	cChunkData(cAllocationPool<cChunkData::sChunkSection> & a_Pool);
-	~cChunkData();
 	
 	#if __cplusplus < 201103L
 		// auto_ptr style interface for memory management
